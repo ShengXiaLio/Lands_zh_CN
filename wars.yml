@@ -1,0 +1,254 @@
+# Wiki 页面（配置）：https://github.com/Angeschossen/Lands/wiki/Wars-Config
+# 玩家解释：https://github.com/Angeschossen/Lands/wiki/Wars
+
+# 启用战争功能？
+# 注意：此设置需要服务器重新加载/重启。
+enabled: true
+
+# 战争是否只能在国家之间发生，而不是单独的土地？
+only-nations: false
+
+# 战争声明设置
+declaration:
+  # 土地需要有多少信任玩家才能被允许参与战争。
+  min-players:
+    # 声明攻击方所需的信任玩家最小数量。
+    attacker: 0
+    # 防御方接收战争声明所需的信任玩家最小数量。
+    defender_3: 0
+  # "from" 和 "to" 定义了每天可以发送声明的小时数。
+  # 最小值：0（凌晨12点）
+  # 最大值：23（晚上11点）
+  # 将其中之一设置为 -1 将禁用此选项。
+  send-time:
+    from: -1
+    to: -1
+  # 在战争开始前，你想给防御方多少时间进行战争准备？
+  # 注意：时间单位是秒
+  # 默认是一天
+  preparation_time: 1d
+  # 攻击方是否只能在至少有一名玩家在线的土地或国家发送战争声明？
+  online: false
+  # 是否向整个服务器发送广播消息？
+  # 你可以在你的语言文件中编辑此消息。
+  broadcast: true
+  # 战争声明是否需要双方接受？
+  # 如果启用，防御方需要在战争开始前通过执行 /Wars declare <attacker> 确认声明。
+  # 他们可以通过执行 /Wars deny 拒绝战争声明。
+  # 注意：此设置需要服务器重新加载/重启。
+  mutual:
+    enabled_2: false
+    # 如果敌人在配置的时间段内未接受声明，是否应该删除声明？
+    # 你可以将值设置为0来禁用此功能。
+    declaration-timeout_time: 5d
+  min-balance:
+    # 设置攻击方能够发动战争的最低土地余额。
+    attacker_2: 5000
+    # 设置防御方被直接宣战所需的最低余额。
+    # 如果他们是一个有更高余额的国家的一部分，他们仍然可以参与战争。
+    defender_2: 0
+  min-age:
+    # 设置攻击方的最低年龄。
+    attacker_time: 0d
+    # 设置防御方的最低年龄。
+    defender_time: 0d
+
+# 配置点数
+points:
+  # 每次击杀获得 x 点
+  kill: 1
+  # 捕获区块点数
+  capture-block:
+    # 如果你捕获了一个捕获旗，获得 x 点。
+    capture: 5
+    # 如果你破坏了敌人的捕获旗，获得 x 点。
+    break: 3
+    # 如果你炸毁了敌人的捕获旗，获得 x 点。
+    explode: 5
+  # 一个团队需要多少点才能获胜？
+  # 计算：<smallest team's member count> * towin-per-player
+  towin:
+    # 所需的胜利点数由最小团队的玩家数量乘以这个值（每人）。
+    per-player: 5
+    # 设置所需的最低点数。如果每人计算结果小于最低值，将使用此值。
+    min_2: 100
+
+# 每当敌人在土地边缘放置信标时，就会创建一个捕获旗。
+# 然后入侵者需要持续控制这个点一段时间。
+capture:
+  enabled_3: true
+  # 捕获点必须被制作出来。玩家可以在他们的 /war 菜单中看到配方。
+  recipe_list:
+    - 'AIR,RED_STAINED_GLASS_PANE,AIR'
+    - 'AIR,BEACON,AIR'
+    - 'IRON_BLOCK,IRON_BLOCK,IRON_BLOCK'
+  # 设置一个团队同时可以放置的捕获点的最大数量。
+  max: 3
+  # 只允许团队每隔一段时间放置一个捕获旗。
+  place-cooldown_time: 10m
+  # 设置受捕获旗影响的区块半径。一旦入侵者进入声明区域，就会开始捕获。
+  # 如果设置为 1，只有放置捕获旗的区块受到影响。
+  # 注意：这个值不应该大于你服务器的视距。
+  radius: 1
+  # 捕获的区域是否应该变成未声明的？
+  unclaim: true
+  # 未声明的区域是否应该被敌人声明？
+  claim: false
+  # 入侵者需要持续控制捕获旗这么长时间，才能捕获区块。
+  hold_time: 10m
+  # 如果区域内有任何玩家，每隔一段时间就生成一个烟花。
+  firework_time: 30s
+  # 在移除捕获旗时是否应该掉落一个捕获旗物品？
+  drop: false
+  # 限制可以放置捕获旗的 y 轴层级。
+  y:
+    min: 30
+    max_2: 127
+
+sounds:
+  capture:
+    place_sound: 'BLOCK_BELL_USE'
+
+# 战争状态消息间隔。此消息在战争进行时显示。这非常有助于通知那些可能已经离线一段时间的玩家，他们的土地正在参与战争。
+status-interval_time: 15m
+
+# 设置战争可以持续的最大时间。当这个时间结束后，得分高的团队将获胜。如果两个团队得分相同，将以平局结束，没有团队会获得奖励。
+# 默认：1.5天
+war-timeout_time: 36h
+
+# 参与战争的玩家是否应该在 dynmap 上被隐藏？
+# 注意：当前无法在使用 BlueMap 时实现这一点。
+hide-player: false
+
+# 是否在参与战争的玩家头顶设置敌友标识？
+# 如果你已经在服务器上使用了记分板或标签列表插件，建议使用 %rel_lands_war_relation% PlaceholderAPI 占位符代替。
+# 注意：只有参与同一场战争的玩家才能看到这些。
+# 注意：如果你使用的是 Folia 而不是 Spigot/Paper：Folia 目前不支持记分板。
+nametag: true
+
+# 在这里，你可以定义一个命令列表，这些命令在玩家参与战争时不应被执行。
+cmd-blacklist_list: [ ]
+
+# 在这里，你可以在战争期间启用自然标志。
+# 可用土地标志列表：https://github.com/Angeschossen/Lands/wiki/Land-Flags
+land-flags_list: [ ]
+
+# 自定义防守方投降时会发生什么。
+surrender:
+  # 贡品设置
+  tribute:
+    # 如果你禁用此选项，即使没有设置贡品，对方团队也将能够投降。
+    force: true
+
+    # 最大贡品设置
+    max:
+      # 攻击方可以设置的最大贡品大小。
+      # 如果防守方在战争中自愿投降，他们将支付攻击方设置的贡品大小。
+      #
+      # 使用 % 设置防守方土地余额的特定百分比。
+      # 使用普通数字设置总金额。
+      # 如果你禁用了银行，钱将从土地所有者那里扣除。
+      defender: 75%
+      # 如果攻击方在战争中自愿投降，无论贡品大小如何，攻击方将支付给
+      # 防守方，在此变量中设置的金额。
+      #
+      # 使用 % 设置攻击方土地余额的特定百分比。
+      # 使用普通数字设置总金额。
+      # 如果你禁用了银行，钱将从土地所有者那里扣除。
+      # 注意：你可以将此设置为 0 以禁用它。
+      attacker: 5000
+
+# 玩家在游戏中也可以更改的战争设置。
+# 请注意，他们需要特定的权限才能更改设置。你可以在 wiki 中找到它们。
+settings:
+  # 允许队友相互击杀。这不会计算在战争击杀统计中。
+  friendly_fire:
+    default_2: true
+
+shield:
+  # 配置何时应给土地一个战争盾牌。
+  # 如果战争盾牌处于激活状态，其他土地就不能攻击这片土地。
+  activation:
+    # 给新土地或国家战争盾牌？
+    # 使用 0 禁用此功能。
+    shield_creation_time: 1d
+
+    # 防守方投降后是否设置战争盾牌？
+    # 如果你想要禁用这个，只需将此值设置为 0。
+    shield_surrender_time: 4d
+
+    # 战争结束后是否为双方设置战争盾牌？
+    # 如果你想要禁用这个，只需将此值设置为 0。
+    shield_end_time: 7d
+
+# 配置战争开始时会发生什么。
+start:
+  # 是否应该向整个服务器广播消息？
+  # 你可以在你的语言文件中编辑此消息。
+  broadcast_2: true
+
+# 配置土地赢得战争时会发生什么。
+end:
+  # 当土地赢得或输掉战争时执行命令。
+  # 占位符：
+  # {winner} - 获胜者的参数名称。不包含空格。
+  # {winner_name} - 获胜者的名称。可能包含空格。
+  # {winner_owner} - 获胜者的所有者。
+  # {loser} - 输家的参数名称。不包含空格。
+  # {loser_name} - 输家的名称。可能包含空格。
+  # {loser_owner} - 输家的所有者。
+  # 要禁用它，请将命令设置为 []。
+  winner:
+    winner-cmds_list: [ ]
+  loser:
+    loser-cmds_list: [ ]
+  
+  # 当战争结束时，输家将支付特定数额的钱给攻击方。
+  # 设置奖励模式。
+  # 使用 % 设置输家余额的特定百分比。
+  # 使用普通数字设置总金额。如果输家没有足够的钱，他们将尽可能多地支付。
+  # 如果你禁用了银行，钱将从土地所有者那里扣除。
+  robbery: 75%
+
+# 入侵意味着敌人正在入侵对手。根据 "role-settings_list", "block-place_list" 和 "block-break_list" 选项，
+# 他们将能够在这些土地上执行特定操作，如打开箱子。
+# 如果你想要限制他们能够做什么，请在本节中编辑 "role-settings_list", "block-place_list" 和 "block-break_list"。
+invading:
+  # 限制入侵敌人何时能够执行特定操作（可以在下面的 "flags" 部分中编辑）。
+  restrictions:
+    # 设置防守方需要在线的玩家数量，攻击方才能在土地上进行交互。
+    # 如果涉及国家：此值适用于当前被入侵的土地，而不是整个国家（土地集合）。
+    # 此选项也影响捕获旗。
+    # 注意：如果你想在没有防守方在线的情况下允许掠夺，将此选项设置为 0。
+    # 注意：此设置需要服务器重新加载/重启。
+    min-players: 1
+    # 设置在目标土地的最后一个玩家离开服务器后，玩家仍然能够攻击土地的时间周期。
+    cooldown_logging_time: 1m
+
+  # 限制入侵敌人能够做什么。
+  flags:
+    # 允许玩家在敌方土地上执行以下操作（仅在战争期间）。
+    # 可用操作：https://github.com/Angeschossen/Lands/wiki/Roles-and-their-Flags#action-flags
+    # 注意：将 BLOCK_PLACE 或 BLOCK_BREAK 添加到此列表将允许入侵者破坏和放置所有方块。如果你想指定方块，请使用下面的列表。
+    # 注意：在战争中，攻击方和防守方还拥有他们入侵区域的不信任角色的标志。
+    role-flags_list:
+      - ITEM_PICKUP
+      - ATTACK_PLAYER
+      - LAND_ENTER
+
+    # 如果土地是战争的一部分，允许放置特定方块。
+    # 注意：如果上面的角色设置列表中没有 BLOCK_PLACE，则只需要这个。
+    # 值：https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+    block-place_list:
+      - LADDER
+      - VINE
+      - SCAFFOLDING
+
+    # 如果土地是战争的一部分，允许破坏特定方块。
+    # 注意：如果上面的角色设置列表中没有 BLOCK_BREAK，则只需要这个。
+    # 值：https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+    block-break_list:
+      - LADDER
+      - VINE
+      - SCAFFOLDING
+#M3NnBXauZVY2UVYPd1aJR2T4cVW3lEROFTW61EMRRlT5N3VXNTRX1mTIB3cSN2bmtWM2kXN

@@ -1,0 +1,30 @@
+# 在此文件中，您可以配置类别。土地类别可以在土地的各种选项菜单中设置。
+# 这有助于玩家在 /lands 列表菜单中查找例如商店土地。
+#
+# 您可以添加自己的类别并删除现有的类别。
+# 注意：需要服务器重新加载或重启才能使对此文件的任何更改生效。
+
+land:
+  enabled: true
+  categories:
+    members:
+      enabled: true
+      name: '§e招募成员 ☺'
+      description:
+        - '§7这片土地正在积极寻找'
+        - '§7新成员。'
+    shop:
+      enabled: true
+      name: '§c商店 $'
+      description:
+        - '§7这片土地包含商店。'
+    pvp:
+      enabled: true
+      name: '§4PvP 竞技场 ⚔'
+      description:
+        - '§7这片土地设有 PvP 竞技场。'
+    mobfarm:
+      enabled: true
+      name: '§9怪物农场'
+      description:
+        - '§7这片土地设有怪物农场。'

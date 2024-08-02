@@ -1,0 +1,1005 @@
+# 资源页面：https://www.spigotmc.org/resources/53313
+# Discord支持：https://discord.gg/B4MAJVk
+
+# 如果您遇到任何问题，请在Discord支持服务器或通过私信报告。
+# 错误或问题通常会在下次更新中修复，只要您报告它们。
+# 您可以忽略某些设置名称中的ID (_<number>)。
+
+# 如果您正在寻找一个插件来在取消声明或荒野时重新生成区块，建议使用WildRegeneration插件：https://polymart.org/resource/wildregeneration.2096
+
+#########################################
+# 基础模式
+#########################################
+# 如果启用，Lands将禁用高级功能，如战争、国家、维护和税费。
+# 启用此选项将禁用所有高级功能。这意味着只有最基本的功能将被启用。此选项适用于想要非常简单的设置并只想让玩家使用插件的声明和信任玩家功能的服务器。启用此选项将强制禁用一些功能，只要基础模式启用，就无法重新启用。
+# 注意：此设置需要服务器重新加载/重启。
+basic-mode: false
+
+#########################################
+# 主要功能
+#########################################
+# 在这里，您可以快速切换一些主要功能。
+# 注意：这些设置需要服务器重新加载/重启。
+features:
+  # 维护可以在此文件的维护部分进一步配置。
+  upkeep: true
+  # 税费可以在此文件的税费部分进一步配置。
+  # 要使税费生效，需要安装Vault及支持Vault的经济插件。
+  taxes: true
+  # 土地和国家可以建立关系，如盟友、敌人和中立。
+  # 如果您禁用此选项，所有现有的关系将被删除。
+  # 这与战争功能结合使用很有用。不过，即使战争功能被禁用，您也可以使用它。
+  relations: true
+
+# 常规选项
+general:
+  # 玩家应该能够在哪些世界声明土地。
+  # 此列表还支持为每个世界设置可选的玩家声明高度。
+  # 示例：world:30:319 -> 这将配置 'world' 世界，声明高度从30到319。
+  # 注意：管理员土地的声明高度总是最大的。
+  # 注意：此设置需要服务器重新加载/重启。
+  claim-worlds_list:
+    - 'world'
+
+  # 默认：英语 (en-US) - 不需要下载。
+  # 这定义了默认语言。您可以在插件的“Language”文件夹中放置多个地区设置，以根据玩家的地区显示不同的地区设置。
+  # 您可以在我们的Discord中访问社区维护的翻译：https://discord.gg/B4MAJVk
+  # 要访问除en-US之外的翻译，请在Discord服务器中执行 /translations。
+  # 翻译名称应与官方语言代码匹配（https://www.oracle.com/java/technologies/javase/jdk8-jre8-supported-locales.html）。
+  # 此选项还影响货币格式的分组和十进制分隔符。
+  language: 'en-US'
+  # 是否强制使用默认语言？这将使对语言文件的更改变得不可能，并将始终使用默认语言。
+  # 这的好处是始终接收到默认地区的修复，例如拼写错误。
+  # 您应该只在您的语言匹配“en-US”时使用此选项。对于其他地区，它不会工作。
+  force-default: false
+
+  # 是否编辑您所在的土地而不是 /lands edit 中的土地？
+  # 对于 /lands claim，您仍然需要使用 /lands edit 设置声明土地。
+  edit-by-loc: false
+
+  # 如果启用，限制权限将被组合而不是只采用最高值。
+  # 示例：一个玩家拥有权限 lands.chunks.5 和 lands.chunks.2。
+  #          如果启用：这将得到7个区块的限制。
+  #          如果禁用：这将得到5个区块的限制。
+  permission-stacking: false
+
+  # 在首次加入时给予玩家物品。
+  # 物品的外观可以在GUI语言文件中编辑。
+  first-join-items:
+    # 选择工具允许他们声明土地。
+    selection:
+      # 如果将槽位或物品数量设置为低于1的值，将不会在首次加入时给予物品。
+      slot_4: 1
+      amount: 1
+      # 如果禁用，玩家将完全不能使用这个物品。
+      usage: true
+    # 信息工具在点击声明时显示关于声明的信息。
+    info:
+      slot_5: 2
+      amount_2: 1
+      usage_2: true
+    # 营地方块在放置时创建临时声明。
+    camp:
+      slot_6: 3
+      amount_3: 1
+      usage_3: true
+    # 声明方块会永久声明玩家放置它们的区块，直到玩家取消声明该区块。
+    claim_block:
+      slot_7: 4
+      amount_4: 1
+      usage_4: true
+
+  # 如果为 false，被 [V]text[/T] 包围的聊天消息部分将只发送给具有 lands.admin.verbose 权限的玩家。
+  # 此设置仅适用于聊天消息。
+  verbose: true
+  # 日期格式
+  # MM：月份
+  # dd：月份中的一天
+  # yyyy：年份
+  # hh：小时
+  # mm：分钟
+  # ss：秒
+  # 注意：这些设置需要服务器重新加载/重启。
+  date-format:
+    # 设置日期文本输出的时区。
+    # 示例：America/Los_Angeles 或 GMT-8:00
+    # 时区列表：https://timezonedb.com/time-zones
+    # 如果为空，则使用服务器所在机器的时区。
+    time-zone: ''
+    # 邀请等的一般格式。
+    # 示例：
+    #   美国12小时格式（a = 12小时格式）：MM/dd/yyyy hh:mm a
+    #   德国24小时格式：dd.MM.yyyy hh:mm
+    general: 'MM/dd/yyyy hh:mm a'
+    # 土地菜单（收件箱）中新闻消息的格式。
+    inbox: 'MMMMM dd'
+    # 仅显示时间时使用的格式。
+    # 示例：
+    #   美国12小时格式（a = 12小时格式）：hh:mm a
+    #   德国24小时格式：hh:mm
+    time_2: 'hh:mm a'
+
+  # 设置所有与经济相关的显示格式。
+  # 信息：https://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html
+  # 注意：此设置需要服务器重新加载/重启。
+  eco-format:
+    # 推荐的物品经济和玩家经验格式：“# 金锭”或“# 经验”
+    normal: '$#,##0.00'
+    # 简短格式将在值低于1000时使用普通格式。
+    # 此格式仅在空间有限的情况下使用，比如在牌子上。
+    # 这将转换余额如下：
+    # 1000000000 = 1B 其中 {value} = 1 且 {unit} = B
+    # 1000000 = 1M
+    # 1000 = 1k
+    short-unit: '${value}{unit}'
+
+  # 通过在服务器上游戏来奖励玩家。
+  # 解释：https://github.com/Angeschossen/Lands/wiki/Playtime-Rewards
+  # 注意：此设置需要服务器重新加载/重启。
+  time-reward:
+    enabled_17: false
+    # 每多少秒玩家应该得到额外的1个区块奖励
+    # 注意：时间单位是秒。
+    # 注意：更改这些需要服务器重新加载/重启。
+    # 注意：玩家可能需要最多60秒才能获得奖励。
+    time:
+      # 每 x 秒额外获得1个区块（/lands claim）。
+      # 如果您想禁用此特定选项，只需将其设置为0或-1。
+      chunk: 3600
+      # 每 x 秒额外获得1个土地，玩家可以成为其成员（不是所有者 - /lands accept, /lands trust）。
+      # 如果您想禁用此特定选项，只需将其设置为0或-1。
+      land: 43200
+      # 每 x 秒额外获得1个土地创建（/lands create）。
+      # 如果您想禁用此特定选项，只需将其设置为0或-1。
+      land-own: 86400
+      # 每 x 秒额外获得1个土地成员（/lands trust）。
+      # 如果您想禁用此特定选项，只需将其设置为0或-1。
+      member: 21600
+      # 每 x 秒额外获得1个 lands.chunks.support.<number>。
+      # 此权限为玩家信任的土地贡献声明。
+      # 如果您想禁用此特定选项，只需将其设置为0或-1。
+      support: 0
+
+  # 拥有权限 (lands.admin) 的玩家是否应该收到通知，告知有新版本更新可用？
+  upd-notify: false
+
+# 经济任务的一般选项，适用于税费、维护和国家维护
+# 每个任务都有自己的部分，分别在此文件和nations.yml中，有指定的选项。
+# 这些选项需要服务器重新加载/重启。
+economic:
+  # 默认配置：税费、维护和国家维护每天午夜收集。
+  interval:
+    # 设置每次支付之间的天数。
+    # 示例：
+    # 1 = 每天在本节顶部指定的时间执行。
+    # 2 = 每隔一天在本节顶部指定的时间执行。
+    days_2: 7
+    # 设置一天中的时间。在x天后的这个时间收集税费、维护和国家维护。
+    # 格式：24小时制。
+    time: '23:00:00'
+    # 设置玩家尝试更改税费或维护与下一次收集之间的最短时间。
+    change-cooldown_time: 2d
+
+  # 如果资金不足以支付维护费用，警告土地或国家。
+  # 配置的时间定义了在实际维护收集之前的一段时间。
+  # 示例：12h = 如果资金不足，至少在维护收集前12小时警告土地和国家。
+  insufficient-altert_time: 2d
+
+# 维护可以在“功能”部分中切换。
+# 维护 = 土地为了保留其声明的土地，向服务器支付一定金额。
+# 税费 = 受信任的玩家每个定义的时间段支付一定金额的税费。
+upkeep:
+  # 每块土地应该支付多少？
+  # 注意：最终支付将是土地大小（区块数）*成本
+  per-chunk: 3.0
+  # 如果土地无法支付最后声明的区块的费用，是否应该删除这些区块？
+  # 示例：土地声明了10个区块，但它只能支付6个区块的维护费用。那么最后声明的4个区块将被删除。
+  # 这在每次维护周期中都会继续，直到没有声明为止。
+  unclaim: false
+  # 如果土地最近创建，是否排除维护？
+  # 这将防止最近创建的土地在土地所有者/土地银行没有足够的钱（并且如果启用了删除区块）时被删除区块。
+  # 因此，只有超过x秒的陆地才需要支付。
+  nopay_time: 2d
+  # 提醒土地成员，他们可以向他们的土地存钱，直到他们有足够的钱支付即将到来的维护费用。
+  # 这有助于您的玩家土地保持跟踪，并且不会失去声明或在国家中的成员资格。
+  # 这将在“insufficient-altert_time”期间的配置周期内发送提醒。
+  upkeep-reminder_time: 1h
+
+# 税费可以在“功能”部分中切换。
+# 税费 = 受信任的玩家每个定义的时间段支付一定金额的税费。
+# 租金 = 玩家可以租用他们选择的区域，而无需获得信任。他们可以决定他们想要租用多长时间。
+# 时间间隔可以在“经济”部分中配置。
+taxes:
+  # 设置最低税费值。
+  min_2: 0
+  # 设置单个区域（如果土地没有子区域，则这将是默认区域）的最大税费值。
+  max_3: 10.0
+  # 如果无法支付税费，是否从不信任该土地的成员？
+  untrust-member: true
+  # 向玩家宣布即将到来的税费支付。
+  # 默认：Lands 会每两小时向玩家发送通知，如果他们没有足够的钱支付税费。
+  # 禁用：0
+  taxes-announcement_time: 2h
+
+# 一般传送选项。
+# 特定命令的传送选项可以在它们的部分中找到。
+teleport:
+  # 一般传送费用。有些功能可能有特定选项，这将覆盖此设置。
+  costs_9: 0
+  # 将新加入服务器的玩家的任何传送费用设置为0。
+  # 您可以在这里定义一个时间跨度。示例：1d = 23小时前加入服务器的玩家将不会为任何传送支付费用。
+  first-join_time: 2h
+  # 等待时间
+  # 时间单位：秒
+  wait: 3
+
+# 土地由一系列通过 /claim 命令或使用声明工具声明的区块组成。
+# 这一节和“区块”部分包含声明选项。
+land:
+  # 土地创建
+  creation:
+    # 强制在土地能够声明区块之前创建土地 (/lands create)。
+    # 如果设置为 false，Lands 将自动生成一个土地，名称为玩家的名称。
+    # 名称可以在土地菜单或使用 /lands rename 命令中更改。
+    force: false
+    # 创建土地 (/lands create) 的费用。
+    # 注意：这也包括自动声明的一块区块。
+    # 注意：拥有 lands.free.lands.<number> 权限的玩家可能会绕过这个限制。
+    #  更多信息：https://github.com/Angeschossen/Lands/wiki/Permissions#numbered-permissions
+    costs: 0.0
+    mainblock:
+      # 切换新的主块的放置。
+      # 这不会移除现有的主块。然而，现有的主块可以手动删除。
+      enabled_3: true
+      # 土地创建后重新定位主块的费用。
+      reposition-costs: 0
+    # 最大土地名称长度
+    # 当使用 MySQL 时，最大可能长度是 80，使用 SQLite（包括颜色代码）时是 32。
+    # 如何过滤名称：https://github.com/Angeschossen/General/wiki/Messages#filter-swear-words-and-forbidden-names
+    name-length: 24
+    # 土地和国家名称中是否允许使用颜色？
+    # 如果以后禁用此选项，将从现有的土地和国家中移除颜色。
+    color_2: true
+    # 土地名称是否允许包括格式，比如粗体、下划线等？
+    format: true
+    # 土地和国家名称中是否允许使用空格？
+    # 空格将在显示为命令参数时被替换为下划线。
+    # 如果以后禁用此选项，将从现有的土地和国家中移除空格。
+    spaces: false
+    # 土地和国家名称中是否允许使用数字？
+    numbers: true
+    # 在土地创建时声明区块半径。
+    # 这些初始声明不会花费土地任何费用。
+    # 注意：0 = 只有玩家当前站立的区块。
+    # 注意：此值不能高于服务器的视距。
+    claim-radius: 1
+
+  # 设置每个区块（16个方块）的最小欧几里得距离。
+  # 如果他们的角色在邻近土地中拥有 LAND_CLAIM_BORDER 标志，玩家可以绕过此限制。
+  chunk-distance:
+    # 可用距离模式：SQUARE, EUCLIDEAN, DIAMOND_SHAPE
+    # SQUARE - 在方形区域内检查被声明区块周围的区块
+    # EUCLIDEAN - 从被声明区块到邻近区块的欧几里得距离
+    # DIAMOND_SHAPE - 在声明周围以钻石形状创建缓冲区
+    mode_3: "EUCLIDEAN"
+    # 非国家土地周围的缓冲区大小。
+    land_2: 1
+    # 国家土地周围的缓冲区大小。
+    # 这个值只适用于邻近土地。这意味着如果一个国家试图扩张，而邻近的声明不是国家的一部分，将使用上面“land_2”的值。
+    nation: 3
+
+  # 强制土地在他们的声明附近声明。
+  force-near:
+    enabled_2: true
+    # 是否将违反 force-near 限制的声明尝试视为新土地？
+    treat-as-new: true
+
+  # 通过放置特殊的声明方块来声明区块。
+  # 您可以通过执行命令 /lands admin player <player> give claimblock [amount] 给予声明方块
+  # 如果您不希望玩家通过命令声明，只需
+  # 不要给他们 lands.command.claim.
+  # 如果您不希望玩家使用声明方块声明，
+  # 只是不要给他们声明方块。
+  claimblock:
+    # 只允许声明方块的所有者使用它？
+    # 注意：如果禁用，玩家可以将声明方块给其他玩家，然后这些玩家也可以使用这些声明方块。如果将来再次启用，
+    # 已经给出的声明方块仍然可以由每个人使用。
+    only-owner: true
+    # 声明方块是否不计入 lands.chunks.<number> 权限？
+    ignore-max: true
+    # 如果玩家使用声明方块声明了一个区块，然后在声明该区块时取消声明，是否应该退还声明方块？
+    refund: true
+
+  # 土地出生点设置
+  spawn:
+    # 创建设置 (/lands setspawn)
+    creation:
+      # 在土地创建 (/lands create) 时自动设置土地出生点？
+      # 注意：出生点总是可以使用 /lands setspawn 更改。
+      auto: true
+      # 费用
+      cost:
+        # 第一次设置的费用
+        set: 0.0
+        # 更改出生点的费用
+        change: 0.0
+
+    # 传送设置
+    teleport:
+      # 如果玩家不受信任，传送到土地出生点的费用。
+      costs:
+        value_3: 0.0
+        # 费用是否应该给予土地？
+        give-land: false
+        pay:
+          # 未受信任玩家是否需要支付传送费用？
+          untrusted: true
+          # 受信任玩家是否需要支付传送费用？
+          trusted: false
+      # 受信任玩家传送到土地出生点的冷却时间。
+      spawn-cooldown_time: 0s
+      # 玩家死亡后是否传送到土地出生点？
+      re-spawn: true
+
+  # 出租/出售区域设置 - 维基百科：https://github.com/Angeschossen/Lands/wiki/Rent-System
+  # 出租 = 玩家可以租用他们选择的区域，而无需获得信任。他们可以决定他们想要租用多长时间。
+  # 税费 = 受信任的玩家每个定义的时间段支付一定金额的税费。
+  # 如果出租或出售被禁用，拥有权限 "lands.admin.disabled-features" 的玩家仍然可以设置出租区域。
+  rent:
+    # 允许玩家设置子区域以供出租？
+    rent: true
+    # 允许玩家出售子区域或他们的整个土地？
+    sell: true
+    # 是否应该将租金交易发送到土地银行？
+    # 注意：这只有在银行通常被启用（选项：enabled_13）时才会生效。
+    # 如果禁用，交易将发送到所有者的个人账户。
+    bank: false
+    # 使用全息图代替牌子？如果启用，在设置出租或出售牌子后，牌子将消失，并且会出现一个可点击的全息图。
+    # 注意：这只有在您的全息图插件通过他们的开发者 API 支持可点击的全息图时才会激活。当前已知支持此功能的插件：CMI
+    holograms: false
+    # 通过 /lands rentlist 命令传送。
+    teleport:
+      # 传送到可出租区域的费用。
+      costs_7: 0.0
+      # 传送到可出租区域的冷却时间。
+      rent-tp-cooldown_time: 0s
+
+  # 邀请设置
+  invite:
+    # 如果您禁用邀请，玩家可以直接信任
+    # 其他玩家使用 /lands trust。
+    # 此选项需要服务器重新加载/重启。
+    enabled_16: true
+    # 土地所有者是否能够被信任到其他土地？
+    # 如果禁用，如果土地所有者至少拥有一块土地，他们就不能成为另一块土地的一部分。
+    invite-owner: true
+
+  # 广播设置
+  broadcast:
+    # 当有人创建了新土地时。
+    # 消息：land.create.broadcast
+    create: true
+    # 如果有人删除了他的土地。如果土地没有任何声明（这可以防止垃圾信息），这个广播将只会发送。
+    # 消息：land.delete.broadcast
+    delete: true
+
+  # /lands chat 设置
+  chat:
+    # /lands chat 消息是否应该转发到控制台？
+    forward: false
+    # 如果玩家启用了 /lands chat，是否应该为玩家静音全局聊天？
+    # 注意：此设置需要服务器重新加载/重启。
+    mute-global: false
+
+  # 重命名设置
+  # 命令：/lands rename
+  rename:
+    # 重命名土地的费用。
+    costs_5: 0.0
+    # 重命名土地的冷却时间。
+    # 绕过权限：lands.bypass.cooldown.rename
+    rename-cooldown_time: 15m
+
+  # 飞行设置（标志可以在 roles 部分找到）
+  fly:
+    # 如果你禁用飞行控制，roles.yml 中的 FLY 标志将不会有任何效果。
+    # 如果你想要在荒野中禁止飞行，你需要在 /lands admin menu 中切换飞行标志。
+    enabled_4: true
+    # 只允许玩家在
+    # 土地声明的世界（设置：claim-worlds_list）中飞行？
+    # 绕过权限：lands.bypass.wilderness.fly
+    # 注意：这需要服务器重新加载/重启。
+    only-claimworld: true
+    # 设置玩家在不允许飞行的位置时飞行权限被禁用的延迟。
+    # 时间单位：秒
+    disable-delay: 3
+    # 设置一个权限，以便在Lands重新为玩家启用飞行之前进行检查。
+    # Lands只有在先前为玩家禁用了飞行，并且他们现在在当前位置再次被允许飞行时，才会重新激活飞行。
+    # 这个权限只是在飞行角色标志之外增加了另一个要求。
+    reactivate-perm: ''
+
+  # /lands setowner 设置
+  setowner:
+    # 禁用此选项将删除 /lands accept 和 /lands deny 命令，如果邀请也被禁用。
+    enabled_12: true
+    # 为了设置新所有者，土地（或者如果银行被禁用，土地所有者）需要支付这个金额。
+    # 这可以防止滥用所有权转移以绕过限制。
+    costs_6: 5000.0
+    # 允许土地所有者只有在最后一次所有者变更是一段时间前时，才能更改所有者？
+    owner-change-cooldown_time: 0s
+
+  # 如果启用，允许土地成员在 /lands storage 命令中存储物品。
+  # 存储也可以通过点击土地主块的桶来访问。
+  # 警告：如果您禁用此选项，所有土地存储中的物品将被删除。
+  storage: true
+
+  # 如果所有者离线超过 x 天，删除不活跃的土地。此任务每6小时执行一次。
+  # 注意：更改这些设置时，建议备份数据库，以防您意外配置错误。
+  #       否则，您可能会冒着无法逆转的土地删除风险。
+  # 注意：这些设置需要服务器重新加载/重启。
+  expiration:
+    # 所有者需要离线多久才被视为不活跃？
+    # 此选项允许您根据他们的游戏时间创建不活跃玩家的不同类别。
+    # 格式：'playtime:offline-time'
+    # 游戏时间被认为是他们在服务器上玩的时间。安装 Lands 之前的时间和包括在内。
+    #
+    # 示例：
+    owner_list:
+      - '15m:7d'
+      - '30m:14d'
+      - '12h:30d'
+      - '1d:60d'
+      - '30d:80d'
+      - '36525d:365d'
+
+    # 土地成员需要离线多久才被视为不活跃？
+    # 不活跃的土地成员将被取消信任。
+    member_list: [ ]
+
+    # 是否应该用土地成员替换不活跃的所有者？
+    # Lands 总是尝试将最高角色的成员设置为新所有者。
+    # 如果没有成员留下，土地将被删除。
+    replace-owner: true
+    # 是否应该删除从服务器玩家数据文件夹（主世界）中删除的玩家？
+    # 注意：建议保持此选项禁用。如果启用此选项，并且您在主世界中删除了 playerdata 文件夹，它可能会根据您的过期设置删除所有受影响的土地。
+    delete-invalid: false
+    # 如果土地至少 x 天旧，并且没有任何声明，是否应该删除它们？
+    # 您可以使用 0 禁用此选项。
+    no-claims: 0
+
+  # 如果玩家在土地内死亡，是否保留他们的库存？
+  # 如果玩家在荒野中死亡，此选项将被强制启用。
+  keep-inventory: false
+
+  # 特定的战斗设置，不适用于战争。
+  combat:
+    # 战斗标记
+    tag:
+      # 如果玩家攻击另一个玩家，他们将被标记 x（时间单位），以便无论土地设置如何，
+      # 其他玩家都可以攻击他们。
+      # 0s = 禁用
+      tag_time: 0s
+      # 如果玩家在设置战斗标记时下线，他们会被杀死吗？
+      quit-kill: false
+    # 受信任的玩家是否可以在荒野中战斗？
+    # 注意：此选项需要服务器重启/加载。
+    ally-wilderness: true
+    # 如果发起者在声明中不允许攻击玩家，是否阻止村庄突袭？
+    block-raids: true
+
+  # 按世界设置声明限制。
+  # 示例：如果您为玩家设置了权限 lands.chunks.5，
+  # 他们将能够在每个声明世界中声明 5 个区块，而不是总共 5 个区块。
+  # 注意：这只适用于声明权限：lands.chunks.<number>, lands.ownlands.<number>
+  # 建议保持此选项禁用。
+  claim-limits-per-world: false
+
+  # 土地银行设置 (/lands balance)
+  bank:
+    # 如果启用，土地操作如 /lands claim 将从土地银行中取钱
+    # 而不是直接从玩家那里。禁用此选项也将禁用 "/lands deposit" 和 "/lands withdraw" 命令。
+    # 注意：如果您想禁用此选项，请确保您的经济插件支持事务
+    # 对于离线玩家。否则，税费和维护等功能可能会导致意外结果。
+    # 注意：此设置需要服务器重新加载/重启。
+    enabled_13: true
+    # 设置最大余额。玩家不会存款超过这个数额。
+    # 如果此值低于土地的维护费用，它将自动调整为土地的维护费用。
+    # 使用 0 完全禁用此选项。
+    max-balance: 0
+    # 如果玩家尝试声明，但土地银行没有足够的钱，是否应该从玩家的个人余额中扣除？
+    # 如果禁用，在维护收集期间如果土地银行中没有足够的钱，他们将无法支付维护费用。
+    fallback-personal: true
+
+# 每个区块代表一个16x16的方块区域。
+chunk:
+  # 声明区块的费用。在某些情况下声明可能免费：
+  # 注意：如果玩家的土地.free.chunks.<number>权限低于土地当前区块数量
+  # 并且当前区块数量大于或等于“claim-radius”选项，则此费用仅有效。
+  # 更多信息：https://github.com/Angeschossen/Lands/wiki/Permissions#numbered-permissions
+  costs_2: 0.0
+  # 每次声明区块费用递增。
+  cost-increase:
+    # 可用模式：
+    # 百分比：例如每次声明在正常声明价格上增加10%的费用。
+    # 增加：例如每次声明时在声明费用上增加10美元。
+    # 默认：禁用此选项
+    mode: 'DEFAULT'
+    value: 2
+    # 设置最大声明费用。
+    # 注意：设置为0以禁用此选项。
+    max_2: 0.0
+  # 退款设置（区块取消声明：/lands unclaim）
+  cashback:
+    # 可用模式：
+    # 百分比：例如从购买价格中退还10%。
+    # 增加：例如只退还10美元。
+    mode_2: 'PERCENTAGE'
+    # 如果你想禁用这个，设置这个值为0。
+    # 如果你使用声明方块（/lands admin player <player> give claimblock），这个值只需要大于0，
+    # 就可以在取消声明时，如果区块是用声明方块声明的，就退还每个声明方块。
+    value_2: 15
+
+  # 区块传送选项
+  teleport:
+    # 传送冷却时间
+    # 绕过权限：lands.bypass.cooldown.teleport
+    chunk-tp-cooldown_time: 3m
+    # 传送费用。
+    costs_3: 0
+
+  # 只允许在创建土地的初始世界中声明区块？
+  # 这意味着一片土地只能在一个世界中有声明。
+  initial-world: false
+
+  # 自动声明玩家所站立的区块。
+  auto-action:
+    # 注意：此设置需要服务器重新加载/重启。
+    enabled_14: true
+    # 自动操作应该在多长时间后停止？
+    stop_time: 2m
+
+  # 自然标志配置。角色标志可以在roles.yml文件中配置。
+  # 可用土地标志列表：https://github.com/Angeschossen/Lands/wiki/Land-Flags
+  # 注意：此选项需要服务器重新加载/重启。
+  land-flags:
+    # 配置将应用于新土地创建的默认自然标志。
+    default_list:
+      - monster_spawn
+      - phantom_spawn
+      - animal_spawn
+      - leaf_decay
+      - plant_growth
+      - snow_melt
+
+    # 应该在标志菜单中显示的自然标志。
+    # 默认：显示所有与玩家相关的自然标志。
+    display_list:
+      - 'all'
+
+    monster_spawn:
+      # 如果未设置怪物生成标志，是否阻止从刷怪笼方块生成怪物？
+      spawners: false
+      # 是否移除进入未设置怪物生成标志的土地或荒野的怪物？自定义名称的怪物不会被移除。
+      # 注意：建议保持禁用。这可能会导致与第三方生物插件的不兼容，
+      # 并且由于Minecraft的限制，可能会影响服务器的性能。
+      # 注意：这也将移除由刷怪笼生成的怪物。
+      # 此选项需要服务器重新加载/重启。
+      remove_2: false
+
+    animal_spawn:
+      # 是否移除进入未设置动物生成标志的土地或荒野的动物？自定义名称的动物不会被移除。
+      # 注意：建议保持禁用。这可能会导致与第三方生物插件的不兼容，
+      # 并且由于Minecraft的限制，可能会影响服务器的性能。
+      # 注意：这也将移除由刷怪笼生成的动物。
+      # 此选项需要服务器重新加载/重启。
+      remove_3: false
+
+# 玩家可以在他们土地内创建区块大小（非区块）的子区域。
+sub-area:
+  # 是否可以在土地内使用 /lands selection 创建子区域？
+  enabled_22: true
+  # 传送到土地内区域的冷却时间。
+  teleport-cooldown_time: 0s
+
+# 营地是临时土地，它们将在定义的时间段后被删除。
+# 营地物品可以在首次加入时获得，或者通过执行 /lands player <player> give 命令。
+camp:
+  # 注意：此设置需要服务器重新加载/重启。
+  enabled_21: true
+  # 设置费用多少。这也包括被声明的区块。
+  costs_8: 0
+  # 营地应该在多久后被删除？
+  # 0 = 永不
+  expire_time: 1d
+  # 配置默认声明区块的半径。
+  # 您可以覆盖这个执行 /lands player <player> give camp <radius> [silent]
+  # 0 = 只有放置营地物品的区块。
+  radius: 1
+  # 设置默认的营地名称。空格有效，如果
+  # 在此文件的土地创建部分启用了“空格”选项。
+  default-name: '{player}''s Camp'
+
+# 关于 /lands relations 和 /nations relations 的选项
+relations:
+  # 是否向服务器上的所有玩家广播新关系？
+  broadcast: true
+
+# 玩家可以切换个人标志以自定义他们的经验。
+player:
+  flags:
+    # 配置默认启用的标志列表。
+    # 这只适用于新玩家，或者那些还没有切换任何标志的玩家。
+    default_2_list:
+      - 'receive_invites'
+      - 'enter_messages'
+      - 'show_inbox'
+
+    # 配置在菜单中显示哪些标志。
+    # ALL = 显示所有标志。
+    display_2_list:
+      - 'all'
+
+# 这是 /lands unstuck 命令的配置。
+# 此命令的目的是让玩家能够从他们陷入的地点传送出来。例如，玩家找到了一条进入土地的路，
+# 但是找不到出路。这个命令将把他们传送到最近的荒野位置。
+unstuck:
+  # 设置此命令的冷却时间。
+  unstuck-cooldown_time: 1h
+
+# 随机传送（/lands wild）
+# 使用此功能时，请确保为每个世界设置了出生点，使用 /setworldspawn。
+random-teleport:
+  # 玩家应该能够在哪些世界使用 /lands wild。
+  # 您可以使用 '*' 作为条目，允许所有世界。
+  # 注意：世界名称是区分大小写的。如果您没有正确输入它们，可能会出现问题。
+  wild-worlds_list:
+    - world
+
+  # 随机传送的权限是否应该基于每个世界，而不仅仅是 lands.command.wild？
+  # 示例：世界 'A'：lands.command.wild.a, 世界 'B'：lands.command.wild.b
+  world-perms: false
+
+  distance:
+    # 从世界出生点的最大距离
+    # 注意：您需要正确设置世界出生点（中间点）以使其正常工作：/setworldspawn
+    # 此设置需要服务器重新加载/重启。
+    max: 30000
+    # 设置玩家当前位置与传送目的地之间的最小距离。
+    min: 800
+
+  # 如果玩家当前不在上述定义的世界中，他们将在此世界中随机传送。
+  # 注意：世界名称是区分大小写的。
+  backup: 'world'
+  # 命令（/lands wild）冷却时间
+  rtp-cooldown_time: 10m
+  # 传送费用
+  costs_4: 0.0
+  # 广泛的生物群系检查：如果您的自定义世界生成器或下载的地图没有正确实现生物群系地图，此选项
+  # 将在传送前加载目标区块以检查生物群系。这将防止玩家被传送到海洋中，因为您的世界生成器或下载的地图的生物群系
+  # 地图在服务器注册之前没有注册。请注意，此选项将消耗性能
+  # 如果不需要，应该禁用它。大多数世界生成器不需要此选项，因为它们支持在传送计数开始之前不加载目标区块来检索生物群系
+  # 地图。
+  extensive-check: false
+
+# 向新玩家介绍声明。
+introduction:
+  # 通知这些玩家，直到他们达到这个游戏时间。
+  # 0 完全禁用此部分。
+  max-playtime_time: 10m
+  # 提醒可以多次发送，但它们有冷却时间，以防止垃圾邮件和烦恼。
+  reminder:
+    # 发送一个警告，告知放置在荒野中的容器没有受到保护。
+    # 只有在玩家还不是任何土地的一部分时才会发送。
+    container-placement: true
+
+# 声音配置
+# 格式：SOUND:VOLUME:PITCH
+# 音量和音调参数是可选的。它们允许您控制声音的播放方式。
+# 禁用声音：只需将其设置为 ''
+sounds:
+  # 在 /lands create 时
+  create-land_sound: 'BLOCK_ANVIL_USE:0.25'
+  # 在 /claim 时播放声音？
+  # 这不包括半径和声明方块声明。
+  claim_sound: 'ITEM_SHOVEL_FLATTEN'
+  # 当玩家收到通知时发送的声音。例如，当玩家在 /trust 时收到邀请。
+  notification_sound: 'ENTITY_EXPERIENCE_ORB_PICKUP:0.25'
+  # 邀请或信任某人的玩家会听到的声音。
+  invite-sent_sound: 'ITEM_ARMOR_EQUIP_ELYTRA'
+  # 在 /lands ban 时被禁玩家会听到的声音。
+  banned_sound: 'BLOCK_IRON_DOOR_CLOSE'
+
+  # Lands 传送玩家时播放的声音。
+  # 声音可以通过将其值设置为空字符串来禁用
+  teleport:
+    teleported_sound: 'ENTITY_ENDERMAN_TELEPORT'
+    countdown_sound: 'BLOCK_LEVER_CLICK'
+
+  # 当玩家的飞行权限在之前被 Lands 禁用后重新启用时播放的声音。
+  # 你可以通过将其设置为空字符串来禁用这个声音。
+  fly-re-enable_sound: 'ITEM_ARMOR_EQUIP_ELYTRA'
+
+# 土地和国家排行榜选项
+# 包括 /lands top, /nations top, 排行榜牌子和全息图
+top-lands:
+  # 如果余额大于或等于1000，Lands 是否应该将土地的余额除以1000并附加“k”？
+  # 注意：这也会影响“[...]_balance” papi 占位符。
+  # 示例：1400 = 1k
+  divide: false
+  # 牌子排行榜设置
+  sign:
+    head:
+      enabled_5: true
+      # 是否将土地所有者的头部放置在排行榜牌子的上方？
+      above: false
+  # 全息图（/lands admin hologram）
+  hologram:
+    # 设置一个物品，该物品应该出现在全息图上方。
+    # 如果你想禁用这个，可以将其设置为AIR。
+    # 注意：更新物品可能需要最多两分钟。
+    item: 'DIAMOND_HELMET'
+  # 从排行榜中排除具有这些 UUID 的玩家。
+  # 从玩家名称获取 UID：https://mcuuid.net/
+  # 注意：对此选项的更改可能需要几分钟才能生效。
+  exclude-uids_list:
+    - '8667ba71-b85a-4004-af54-457a9734eed7'
+
+# /lands view 等可视化选项
+visualization:
+  type:
+    # 荒野
+    wilderness:
+      # 粒子可以在这里找到：
+      # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html#enum.constant.summary
+      particle: 'REDSTONE'
+      # 注意：只有 REDSTONE 粒子的颜色可以更改。
+      # 要编辑颜色，你需要在这里插入十六进制值：
+      # https://www.google.com/search?q=color+picker
+      color: '#00bd0a'
+      # 持续时间，单位为秒
+      duration: 20
+      rows: 1
+      # 如果你想对子区域（不是土地边界）使用方块而不是粒子：
+      # 注意：不建议将其与下面的 'only-corners' 选项一起使用，因为向玩家发送方块变化可能会导致客户端卡顿。另外，使用粒子在服务器端性能更好。
+      # 注意：如果为空或为AIR，它将使用上面配置的粒子。
+      block: ''
+    # 如果玩家是土地所有者
+    own:
+      particle_3: 'REDSTONE'
+      # 注意：只有 REDSTONE 粒子的颜色可以更改。
+      # 要编辑颜色，你需要在这里插入十六进制值：
+      # https://www.google.com/search?q=color+picker
+      color_3: '#1eff00'
+      duration_3: 4
+      rows_3: 1
+      # 如果你想对子区域（不是土地边界）使用方块而不是粒子：
+      # 注意：不建议将其与下面的 'only-corners' 选项一起使用，因为向玩家发送方块变化可能会导致客户端卡顿。另外，使用粒子在服务器端性能更好。
+      # 注意：如果为空或为AIR，它将使用上面配置的粒子。
+      block_2: ''
+    # 如果玩家在土地中被信任
+    trusted:
+      particle_4: 'REDSTONE'
+      # 注意：只有 REDSTONE 粒子的颜色可以更改。
+      # 要编辑颜色，你需要在这里插入十六进制值：
+      # https://www.google.com/search?q=color+picker
+      color_4: '#f2f200'
+      duration_4: 4
+      rows_4: 1
+      # 如果你想对子区域（不是土地边界）使用方块而不是粒子：
+      # 注意：不建议将其与下面的 'only-corners' 选项一起使用，因为向玩家发送方块变化可能会导致客户端卡顿。另外，使用粒子在服务器端性能更好。
+      # 注意：如果为空或为AIR，它将使用上面配置的粒子。
+      block_3: ''
+    # 如果玩家在土地中不被信任
+    untrusted:
+      particle_5: 'REDSTONE'
+      # 注意：只有 REDSTONE 粒子的颜色可以更改。
+      # 要编辑颜色，你需要在这里插入十六进制值：
+      # https://www.google.com/search?q=color+picker
+      color_5: '#ff0000'
+      duration_5: 4
+      rows_5: 1
+      # 如果你想对子区域（不是土地边界）使用方块而不是粒子：
+      # 注意：不建议将其与下面的 'only-corners' 选项一起使用，因为向玩家发送方块变化可能会导致客户端卡顿。另外，使用粒子在服务器端性能更好。
+      # 注意：如果为空或为AIR，它将使用上面配置的粒子。
+      block_4: ''
+    # 可视化选择模式（/lands selection）
+    selection:
+      particle_8: 'REDSTONE'
+      # 注意：只有 REDSTONE 粒子的颜色可以更改。
+      # 要编辑颜色，你需要在这里插入十六进制值：
+      # https://www.google.com/search?q=color+picker
+      color_8: '#ff9d00'
+      # 将持续显示，直到选择模式被禁用。
+      # 你可以通过编辑此值来更改。
+      duration_8: -1
+      rows_8: 1
+
+  # /lands view 可视化
+  view:
+    # Lands 是否应该在玩家加入后自动显示土地边界？
+    # 注意：你可以将 duration_9（下面）设置为 -1 以使可视化永久。
+    join: false
+    # 粒子出现的间隔。
+    # 最小值为一秒。
+    view-interval_time: 1s
+    # 土地查看的持续时间。
+    # 时间单位为秒。你可以通过设置此值为 -1 使其永久。
+    duration_9: 60
+    # 是否应该将边界可视化固定在初始高度（y 区块）？
+    # 如果为 false：边界将跟随玩家的位置上下移动。
+    # 注意：这是默认设置。玩家仍然可以通过执行 /lands view stay 来切换它。
+    y-lock: false
+    # 设置从玩家处显示子区域的最大区块距离。
+    # 推荐：112
+    area-radius: 112
+    # 设置区块的视距。
+    # 0 = 服务器的默认视距
+    chunk-radius: 0
+
+  # 是否仅为子区域可视化角落？
+  # 注意：这不会影响土地边界。
+  only-corners: true
+  # 设置 y 偏移量（调整可视化的高度）
+  offset: 0
+
+  # /lands map 设置
+  map:
+    # 玩家是否可以通过点击地图来声明土地？
+    claim: true
+    # /lands map 长度
+    # X 长度（左右）
+    length: 15
+    # Y 高度（向上）
+    height_2: 10
+
+# 命令选项
+command:
+  # 这对于时间奖励和 "/lands player <player> give permission chunk" 命令是必要的
+  permission-plugin:
+    # 你的权限插件添加权限的命令。
+    # {player} 玩家的名称
+    # {uuid} = 玩家的 UUID
+    # {permission} = Lands 权限
+    add: 'Luckperms user {player} permission set {permission}'
+    # 你的权限插件删除权限的命令。
+    remove: 'Luckperms user {player} permission unset {permission}'
+
+  # 这些选项需要服务器重新加载/重启。
+  alias:
+    # 设置 /lands 命令的别名
+    # 注意：此设置需要服务器重新加载/重启。
+    lands_list: [ ]
+    # 设置 /wars 命令的别名
+    # 这仅在启用战争时需要。
+    # 注意：此设置需要服务器重新加载/重启。
+    wars_list:
+      - 'w'
+    # 设置 /nations 命令的别名
+    # 这仅在启用国家时需要。
+    # 注意：此设置需要服务器重新加载/重启。
+    nations_list:
+      - 'n'
+
+  # 阻止命令
+  # 它们不区分大小写。
+  blacklist:
+    # 这会影响所有在他们不被信任的土地上站立的玩家。
+    nottrusted_list:
+      - sethome
+    # 这会影响所有在土地上站立的玩家。
+    general_list: [ ]
+
+# Lands 菜单选项（/lands menu）
+gui:
+  # 是否应该自动调整物品说明行的长度？
+  # 推荐长度是35。
+  # 注意：将其设置为0以禁用。
+  max-lore-length: 0
+  # /lands list 菜单是否只显示玩家可以传送的土地？
+  # 玩家之后仍然可以切换此设置。这只是默认设置。
+  list-only-public: false
+
+# 数据库选项
+database:
+  # MySQL 数据库
+  # 为了无问题地使用此功能，您需要在 MySQL 服务器配置中正确配置连接限制等。
+  # 如果您想跨服务器同步土地和声明，请阅读设置说明：https://github.com/Angeschossen/Lands/wiki/Database#synchronizing-claims-across-servers
+  mysql-v2:
+    enabled_19: false
+    address_2: 'localhost'
+    port_2: '3306'
+    username_2: 'minecraft'
+    password_2: 'password'
+    database_2: 'lands'
+
+    # 如果插件与其他插件共享数据库，强烈建议设置一个唯一的表前缀。
+    table-prefix_2: 'lands_'
+
+  # 需要同步跨服务器的土地和声明。
+  redis:
+    enabled_6: false
+    address_3: "redis://127.0.0.1"
+    port_3: 6379
+    # 数据库索引。没有其他插件应该使用相同的索引。
+    database-index: 1
+    username_3: "default"
+    password_3: "password"
+    # 这应该是您在 BungeeCord 或 Velocity 配置中为此服务器配置的名称。
+    server-name: "server-1"
+    # 此选项应该只在连接到同一个 Lands 数据库和 Redis 的服务器中的一个上启用。
+    # 如果为 true：此服务器将为所有连接到同一个 Lands 数据库和 Redis 的服务器上的土地执行任务，例如维护、税费等。
+    master: false
+
+  # 使用 SQLite 作为数据库。不需要数据库服务器。
+  sqlite-v2: false
+
+# 第三方插件选项
+integration:
+  # 管理集成
+  manager:
+    WorldEdit:
+      # 是否不允许在玩家不被信任的土地上使用 WorldEdit？
+      # 在声明中绕过权限：lands.bypass.worldedit
+      # 在荒野中绕过权限：lands.bypass.wilderness.worldedit
+      enabled_7: true
+
+    # 将 lands-claim 标志也应用于世界管理插件（如 WorldGuard）的全局区域？
+    # 注意：此选项应该仅在您想要禁止在荒野中声明时启用。
+    #       如果您想要管理像方块破坏这样的荒野标志，请改用 /lands admin menu。
+    # 此选项需要服务器重新加载/重启。
+    global-regions: false
+
+  # 如果受影响区域已禁用生成，是否应该取消神话怪物的生成？
+  # 由于 MythicMobs 不能区分敌对和友好的怪物，所以这可能会导致意外的结果，具体取决于您的用例。
+  # 此选项需要服务器重新加载/重启。
+  mythicmobs: false
+
+  # 车辆插件的车辆选项。这不会影响 Minecraft 原版车辆。
+  # 如果启用：
+  #   如果玩家在土地中不被允许使用车辆，则不允许放置车辆。
+  #   允许土地成员从土地中的其他玩家那里拾取车辆，即使他们不拥有该车辆。
+  # 如果禁用，未受信任的玩家可以放置车辆，土地成员无法移除这些车辆。
+  vehicles: true
+
+  # Lands 是否应该为设置权限提供 Luckperms 上下文？
+  luckperms-context: true
+
+  # 经济设置
+  # 如果所有类型都被禁用，则将使用基于物品的经济。
+  # 注意：更改这些选项时，您可能还想调整此配置中的“eco-format”。
+  economy:
+    vault:
+      # 您需要一个支持 Vault 的经济插件才能使其工作。
+      enabled_10: true
+      # 服务器银行账户名称。维护费用将转入此处。空表示禁用此功能。
+      server-bank: ''
+    # 玩家经验
+    exp:
+      enabled_15: false
+    # 当所有其他经济选项都被禁用或不可用时，使用物品货币。
+    # 货币物品可以在 GUI 语言文件中更改。在那里搜索“currency”。语言文件位于 /plugins/Lands/Language/yourlocale_gui.yml。
+    # 您还可以在 GUI 语言文件中为货币物品应用模型数据：https://github.com/Angeschossen/PluginFrameworkAPI/wiki/GUI-Menus#set-custom-model-data
+    # 请注意，如果您不使用 Vault 经济，就不能启用税费。
+    items:
+      # 如果启用，只有名称、说明等相同的物品才会属于货币。不仅仅是相同类型的物品或具有相同模型数据的物品。
+      strict: false
+
+# 您可能不需要编辑此部分。
+entities:
+  # 您可以在这里指定哪些实体应该被视为动物或怪物。
+  # 这会影响涉及这些实体组的插件的所有部分。
+  # 如果列表包含“default”：未来的更新中属于此类别的新实体将自动添加。
+  animals_list:
+    - 'default'
+  monsters_list:
+    - 'default'
+
+# 配置日志记录
+logging:
+  # 我们可能在您提交错误报告时要求您启用此功能。
+  # 它也有助于为 events.yml 调试变量。
+  debug: false
+  # 打印事件的调用者等。
+  # 可用：land_balance_changed
+  print-callstack_list: []
+#MTQslnQ0g1UzhkZMdWNWZTd0UFZy0keNl3aE5UMNRUT5tGVXVDb1ZWSaNUQSN3crZjc5dHN
