@@ -47,7 +47,7 @@ general:
   # 要访问除en-US之外的翻译，请在Discord服务器中执行 /translations。
   # 翻译名称应与官方语言代码匹配（https://www.oracle.com/java/technologies/javase/jdk8-jre8-supported-locales.html）。
   # 此选项还影响货币格式的分组和十进制分隔符。
-  language: 'en-US'
+  language: 'zh-CN'
   # 是否强制使用默认语言？这将使对语言文件的更改变得不可能，并将始终使用默认语言。
   # 这的好处是始终接收到默认地区的修复，例如拼写错误。
   # 您应该只在您的语言匹配“en-US”时使用此选项。对于其他地区，它不会工作。
